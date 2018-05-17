@@ -12,6 +12,8 @@
 var currentPlayer = 1;
 var play1TotalScore = 0; //全局的變量
 var play2TotalScore = 0; //全局的變量
+
+var counter = 1;
 //DOM - Document Object Model
 
 // document.querySelector('#play1-current-score').textContent = dice;
@@ -54,5 +56,29 @@ document.querySelector('.roll').addEventListener('click', function(){
 		document.querySelector('.panel-' + currentPlayer).classList.add('active');
 
 	}
+
+	counter += 1;
+	// console.log(counter);
+
+	if (counter === 7) {
+
+		if (play1TotalScore > play2TotalScore) {
+
+			document.querySelector('.winner1').style.display = 'block';
+			document.getElementById('play1-current-score').style = 'margin-top: 0px;';
+
+		} else if (play1TotalScore < play2TotalScore) {
+
+			document.querySelector('.winner2').style.display = 'block';
+			document.getElementById('play2-current-score').style = 'margin-top: 0px;';
+
+		} else {
+
+			document.querySelector('.roll').textContent = '平手';
+
+		}
+
+	}
+
 
 });
