@@ -47,6 +47,7 @@ document.querySelector('.roll').addEventListener('click', function(){
 			document.querySelector('.panel-' + currentPlayer).classList.remove('active');
 			currentPlayer = 2;
 			document.querySelector('.panel-' + currentPlayer).classList.add('active');
+			document.getElementById('play' + currentPlayer + '-current-score').textContent = 0;
 
 		} else {
 
@@ -58,7 +59,8 @@ document.querySelector('.roll').addEventListener('click', function(){
 			document.querySelector('.panel-' + currentPlayer).classList.remove('active');
 			currentPlayer = 1;
 			document.querySelector('.panel-' + currentPlayer).classList.add('active');
-
+			document.getElementById('play' + currentPlayer + '-current-score').textContent = 0;
+			
 		}
 
 		counter += 1;
@@ -90,10 +92,44 @@ document.querySelector('.roll').addEventListener('click', function(){
 
 	} else {
 
-		
+		// init
+		init(); //從外部調用
 		isPlayingGame = true;
 
 	}
 
+});
+
+function init() {
+
+	currentPlayer = 1;
+	play1TotalScore = 0;
+	play2TotalScore = 0; 
+
+	counter = 1;
+
+	document.querySelector('.dice').style = 'display: none';
+	document.querySelector('.winner1').style.display = 'none';
+	document.querySelector('.winner2').style.display = 'none';
+
+	document.getElementById('play1-current-score').textContent = 0;
+	document.getElementById('play2-current-score').textContent = 0;
+	document.getElementById('play1-total-score').textContent = 0;
+	document.getElementById('play2-total-score').textContent = 0;
+
+	document.querySelector('.panel-1').classList.add('active');
+	document.querySelector('.panel-2').classList.remove('active');
+
+	document.querySelector('.roll').textContent = '搖骰子';
+	document.getElementById('play1-current-score').style = 'margin-top: 55px';
+	document.getElementById('play2-current-score').style = 'margin-top: 55px';
+
+}
+
+document.querySelector('.newGame').addEventListener('click', function() {
+
+		// init
+		init(); 
+		isPlayingGame = true;
 
 });
