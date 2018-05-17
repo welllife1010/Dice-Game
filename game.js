@@ -5,11 +5,13 @@
 */
 //if we put dice variable in global execution context, 
 //we will only get one single result, nomatter how many time 
-//we click the eventListner 
+//we click the eventListner. 
 // var dice = Math.floor(Math.random() * 6) + 1; // Random Number 1 - 6
 // console.log(dice);
 
 var currentPlayer = 1;
+var play1TotalScore = 0; //全局的變量
+var play2TotalScore = 0; //全局的變量
 //DOM - Document Object Model
 
 // document.querySelector('#play1-current-score').textContent = dice;
@@ -25,7 +27,32 @@ document.querySelector('.winner2').style.display = 'none';
 document.querySelector('.roll').addEventListener('click', function(){
 
 	var dice = Math.floor(Math.random() * 6) + 1;
-	console.log(dice);
+	// console.log(dice);
 	document.querySelector('.dice').style = 'display: block';
 	document.querySelector('.dice').src = 'dice' + dice + '.png';
+
+	if (currentPlayer === 1) {
+
+		document.getElementById('play' + currentPlayer + '-current-score').textContent = dice;
+		
+		play1TotalScore += dice;
+		document.getElementById('play' + currentPlayer + '-total-score').textContent = play1TotalScore;
+
+		document.querySelector('.panel-' + currentPlayer).classList.remove('active');
+		currentPlayer = 2;
+		document.querySelector('.panel-' + currentPlayer).classList.add('active');
+
+	} else {
+
+		document.getElementById('play' + currentPlayer + '-current-score').textContent = dice;
+		
+		play2TotalScore += dice;
+		document.getElementById('play' + currentPlayer + '-total-score').textContent = play2TotalScore;
+
+		document.querySelector('.panel-' + currentPlayer).classList.remove('active');
+		currentPlayer = 1;
+		document.querySelector('.panel-' + currentPlayer).classList.add('active');
+
+	}
+
 });
